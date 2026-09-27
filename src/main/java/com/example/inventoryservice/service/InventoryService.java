@@ -44,6 +44,7 @@ public class InventoryService {
                 .orElseGet(() -> createNew(command));
 
         InventoryReservedEvent event = new InventoryReservedEvent(
+                UUID.randomUUID(),
                 reservation.getSagaId(),
                 reservation.getOrderId(),
                 reservation.getId().toString(),
@@ -65,6 +66,7 @@ public class InventoryService {
 
     private void publishInventoryReservationFailed(ReserveInventoryCommand command, String errorMessage) {
         InventoryReservationFailedEvent failedEvent = new InventoryReservationFailedEvent(
+                UUID.randomUUID(),
                 UUID.fromString(command.sagaId()),
                 UUID.fromString(command.orderId()),
                 errorMessage
